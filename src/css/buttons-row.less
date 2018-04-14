@@ -1,0 +1,33 @@
+.buttons-row {
+	height: 44px;
+	background-color: white;
+	.button {
+		height: 44px;
+		line-height: 44px;
+		border: none;
+		border-radius: 0;
+		color: #000;
+		&:after {
+			content: '';
+			width: 0;
+			height: 2px;
+			background-color: @mainColor;
+			position: absolute;
+			bottom: 2px;
+			left: 0;
+		}
+		&.active {
+			background-color: transparent;
+			color: @mainColor;
+		}
+		&.active {
+			background-color: transparent;
+			&:after {
+				width: 100%;
+			}
+		}
+		&:first-child {
+			border: none;
+		}
+	}
+}

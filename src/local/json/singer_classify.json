@@ -1,0 +1,38 @@
+[
+	{
+		"classify_name": "话语男歌手",
+		"data_key": "cn_man"
+	},
+	{
+		"classify_name": "华语女",
+		"data_key": "cn_woman"
+	},
+	{
+		"classify_name": "话语组合",
+		"data_key": "cn_team"
+	},
+	{
+		"classify_name": "日本男",
+		"data_key": "j_man"
+	},
+	{
+		"classify_name": "日本女",
+		"data_key": "j_woman"
+	},
+	{
+		"classify_name": "日本组合",
+		"data_key": "j_team"
+	},
+	{
+		"classify_name": "欧美男",
+		"data_key": "eu_man"
+	},
+	{
+		"classify_name": "欧美女",
+		"data_key": "eu_woman"
+	},
+	{
+		"classify_name": "欧美组合",
+		"data_key": "eu_team"
+	}
+]

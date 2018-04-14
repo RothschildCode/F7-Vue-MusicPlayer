@@ -1,0 +1,35 @@
+/* =========
+Your custom styles go here
+ ========= */
+@import "./variable.less";
+@import "./navbar.less";
+@import "./toolbar.less";
+@import "./list-item.less";
+@import "./tools.less";
+@import "./buttons-row.less";
+@import "./list-cover.less";
+@import "./subtoolbar.less";
+@import "./tabs.less";
+.no-margin-top {
+	margin-top: 0 !important;
+}
+.flex-row-wrap {
+	display: flex;
+	flex-flow: row wrap;
+}
+.align-self-middle {
+	display: flex;
+	align-self: center;
+}
+.default-album{
+	background-image: url('../assets/defaultAlbum.png')
+}
+.list-block {
+	margin-top: @marginTopHeight;
+}
+body {
+	-webkit-overflow-scrolling: touch;
+}
+* {
+	cursor: pointer !important;
+}

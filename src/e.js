@@ -1,0 +1,19 @@
+import Vue from 'vue'
+
+var e = new Vue({})
+
+let EVENT = {
+	//查询歌曲页面事件
+	SEARCH_PAGE: {
+		SIGNAL_TAB_TOUCH: 'SEARCH_SIGNAL_TAB_TOUCH',
+		SHEET_TAB_TOUCH: 'SEARCH_SHEET_TAB_TOUCH',
+		ALBUM_TAB_TOUCH: 'SEARCH_ALBUM_TAB_TOUCH',
+		MV_TAB_TOUCH: 'SEARCH_MV_TAB_TOUCH',
+		KEY_TOUCH: 'KEY_TOUCH',
+		SEARCH_BTN_TOUCH: 'SEARCH_BTN_TOUCH'
+	}
+}
+export {
+	e,
+	EVENT
+}

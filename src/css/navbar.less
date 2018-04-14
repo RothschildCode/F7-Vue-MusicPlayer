@@ -1,0 +1,29 @@
+@import "./mixins.less";
+
+.navbar{
+	background-color: @mainColor;
+	// height: @navbarHeight;
+	.bg {
+		width: 100%;
+		height: 100%;
+		background-color: @mainColor;
+		opacity: 1;
+	}
+	&.dynimic-opacity {
+		.bg {
+			opacity: 0;
+		}
+	}
+	.navbar-inner{
+		.center, .left, .right{
+			color: #fff;
+			font-weight: 400 !important;
+			a {
+				color: #fff;
+			}
+		}
+	} 
+	&:after {
+		height: 0;
+	}
+}
