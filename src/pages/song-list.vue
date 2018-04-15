@@ -7,18 +7,6 @@
 	</f7-page>
 </template>
 
-<style lang="less">
-	.album-back {
-		width: 100%;
-		height: 100%;
-		background-size: cover;
-		background-position: center;
-		position:absolute;
-		z-index: -1;
-		filter: blur(10px);
-	}
-</style>
-
 <script>
 	import Navbar from '../components/Navbar'
 	import MusicList from '../components/MusicList'

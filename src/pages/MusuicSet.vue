@@ -24,32 +24,10 @@
 
 			</div>
 		</div>		
-		<div v-if="setType == 1" class="list-cover">
-			<div class="back" :style="'background-image:url('+data.specialImg +')'"></div>
-			<div class="row wrapper">
-				<div class="col-30">
-					<img class="sheet-img" :src="data.specialImg" alt="">
-				</div>
-				<div class="col-70">
-					<div class="sheet-name ellipsis" v-html="data.spcialName"></div>
-					<div class="sheet-name ellipsis" v-html="data.specialCreat"></div>
-				</div>
-			</div>		
-		</div>
-		<div v-if="setType == 2" class="list-cover">
-			<div class="back" :style="'background-image:url('+data.img +')'"></div>
-			<div class="row wrapper">
-				<div class="col-30">
-					<img class="sheet-img" :src="data.img" alt="">
-				</div>
-				<div class="col-70">
-					<div class="sheet-name ellipsis" v-html="data.name"></div>
-					<div class="sheet-name ellipsis" v-html="data.language"></div>
-					<div class="sheet-name ellipsis" v-html="data.company"></div>
-					<div class="sheet-name ellipsis" v-html="data.publicTime"></div>
-				</div>
-			</div>		
-		</div>		
+
+		<header-cover v-if="setType == 1" :src="data.specialImg" :labels="[data.spcialName, data.specialCreat]"></header-cover>
+		<header-cover v-if="setType == 2" :src="data.img" :labels="[data.name, data.language, data.company, data.publicTime]"></header-cover>
+	
 		<div class="page-content">
 			<div class="tabs">
 			  <div id="list" class="tab active">
@@ -92,15 +70,12 @@
 <script>
 	import Navbar from '../components/Navbar'
 	import MusicList from '../components/MusicList'
-
-	import {get, set} from '../utils/local-storage'
+	import HeaderCover from '../components/HeaderCover'
 
 	export default {
 		data() {
 			return {
-				data: {
-					specialImg: JSON.parse(get("config")).sheet_def_img
-				},
+				data: {},
 				list: [],
 				setType: 1
 			}
@@ -129,6 +104,7 @@
 		},
 		components: {
 			Navbar,
+			HeaderCover,
 			MusicList
 		}
 	}

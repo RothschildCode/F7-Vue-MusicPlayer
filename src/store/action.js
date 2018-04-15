@@ -7,9 +7,10 @@ import * as qualities from '../utils/song-quality'
 
 import * as operateFuncs from '../utils/song-operate-func'
 import defaultConf from '../config/appConf'
+import {APP_DEF_CONF} from '../config/config'
 import * as factory from '../utils/DataFactory'
 
-import myStorage from '../utils/storeCache'
+import {get, set} from '../utils/local-storage'
 
 export function getSongsByKeyword({commit}, { data, callback }) {
 	let param = $.param(data)
@@ -257,7 +258,7 @@ export function initPlayerInfo({commit}, callback = () => {}) {
 	let config = operateFuncs.getConfig()
 	if(!config) {
 		config = defaultConf.config
-		myStorage.set("config", config)
+		set("config", config)
 	} else {
 		for(let confAttr in defaultConf.config) {
 			config[confAttr] = config[confAttr] ? config[confAttr] : defaultConf.config[confAttr]

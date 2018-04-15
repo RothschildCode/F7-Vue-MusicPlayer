@@ -3,15 +3,15 @@
   <div id="app">
 
   <div class="panel-overlay"></div>
-
-    <play-list-popup></play-list-popup>
-
     <!-- Main Views -->
     <f7-views>
       <f7-view id="main-view"  main>
         <f7-pages>
           <f7-page class="navbar-fixed">
             <f7-toolbar class="theme-a">
+              <a href="#" data-panel="left" class="tab-link link open-panel">
+                <label class="fa fa-bars fa-1x"></label>
+              </a>
               <f7-link tab-link="#staranchor" active>星主播</f7-link>
               <f7-link tab-link="#newsong">新歌</f7-link>
               <f7-link tab-link="#singer">歌手</f7-link>
@@ -39,6 +39,8 @@
       </f7-view>
     </f7-views>
 
+    <menu-panel></menu-panel>
+    <play-list-popup></play-list-popup>
     <play-popup></play-popup>
     <quality-popover></quality-popover>
     <mini-player></mini-player>
@@ -60,6 +62,7 @@ import Navbar from './components/Navbar'
 import MiniPlayer from './pages/mini-player'
 import QualityPopover from './pages/quality-popover'
 import StarAnchorView from './pages/StarAnchorList'
+import MenuPanel from './pages/MenuPanel'
 import HomeSpecialTab from './pages/HomeSpecialTab'
 export default {
   data() {
@@ -88,6 +91,7 @@ export default {
   components: {
     // LibraryView,
     NewView,
+    MenuPanel,
     LibrarySingerView,
     SongSheetView,
     CenterView,

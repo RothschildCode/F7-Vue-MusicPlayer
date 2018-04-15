@@ -21,20 +21,26 @@
 			<div class="singer-info">
 				<div class="singer-name">
 					<span>{{ readySong.author_name }}</span>
+					<br>
 					<a v-if="config.quality=='NORMAL'" class="quality-link" @click="qualityClick()">普通品质</a>
 					<a v-if="config.quality=='HQ'" class="quality-link" @click="qualityClick()">高品质</a>
 					<a v-if="config.quality=='SQ'" class="quality-link" @click="qualityClick()">超品质</a>
 					<a v-if="config.quality=='RES'" class="quality-link" @click="qualityClick()">无损</a>
+
+					<a class="quality-link" @click="viewModeClick()" v-html="viewMode.name"></a>
+
 				</div>
-				<img :src="readySong.img" width="50%">
+				<img :src="readySong.img" width="50%" v-bind:class="{unvisible: !viewMode.layout.cover}">
 			</div>
-			<div class="album-back" id="albumBack" :style="'background-image:url('+readySong.img+')'"></div>
+			<div class="album-back" id="albumBack" :style="'background-image:url('+readySong.img+')'" v-bind:class="{blur: viewMode.layout.backBlur}"></div>
 			<div class="overlay"></div>
-			<div class="play-lrc-tools" id="playLrcTools">
+			<div class="play-lrc-tools" v-bind:class="{unvisible: !viewMode.layout.lrc.visible}" id="playLrcTools">
 				<span class="based-line"></span>
 			</div>
-			<div class="play-lrc" id="playLrc">
+			<div v-bind:class="{unvisible: !viewMode.layout.lrc.visible}" class="play-lrc" id="playLrc">
+				<div class="blank">倾听音乐，享受生活</div>
 				<div v-for="lrcItem in attr.lrc" :class="lrcItem.current ? 'current' : ''">{{ lrcItem.text }}</div>
+				<div class="blank">倾听音乐，享受生活</div>
 			</div>
 		    	<div class="controls">
 		    		<div class="row flex-row-wrap controls-bar">
@@ -79,7 +85,7 @@
 							</a>
 						</div>
 						<div class="col-20 controls-item">
-							<a href="#" data-panel="right" class="icon-only open-panel link">
+							<a href="#" data-panel="right" class="icon-only link open-panel">
 								<i class="fa fa-list-ul fa-1x"></i>
 							</a>
 						</div>
@@ -179,7 +185,6 @@
 			z-index: -1;
 			background-position: center;
 			background-size: cover;
-			filter: blur(50px);
 		}
 		.overlay{
 			width: 100%;
@@ -226,11 +231,11 @@
 				// background-color: #fff;
 				position: fixed;
 				opacity: .5;
-				-webkit-transform: translateY(8200%);
-				-moz-transform: translateY(8200%);
-				-ms-transform: translateY(8200%);
-				-o-transform: translateY(8200%);
-				transform: translateY(8200%);
+				// -webkit-transform: translateY(8200%);
+				// -moz-transform: translateY(8200%);
+				// -ms-transform: translateY(8200%);
+				// -o-transform: translateY(8200%);
+				// transform: translateY(8200%);
 			}
 		}
 	}
@@ -242,7 +247,81 @@
 
 	import { numberToSlong, slongToNumber } from '../utils/common'
 	import * as modes from '../utils/play-mode'
+	import {VIEW_MODE} from '../config/config'
 
+	let LRC_ITEM_HEIGHT = 24
+
+	//歌词控制器
+	class LrcController {
+		constructor(p, h) {
+			this.height = h
+			this.comp = p.comp
+			this.audio = p.audio
+			this.lrcItemH = LRC_ITEM_HEIGHT
+			this.init()
+		}
+
+		init() {
+			var _h = document.documentElement.clientHeight * (this.height / 100)
+			var _rc = Math.floor(_h / this.lrcItemH)
+			var height = this.lrcItemH * _rc
+
+			var _blankRow = Math.floor(height / 2 / this.lrcItemH)
+
+			//slideBar 进度条
+			//lrc 歌词列表
+			//lrcTools 控制条面板
+			let { slideBar, lrc, lrcTools } = this.comp.tools
+			$(lrc).height(height + "px")
+			$(lrcTools).height(height + "px")
+			$(lrcTools).find(".based-line").css("margin-top", (height / 2 + (this.lrcItemH / 2)) + "px")
+			var lrcs = $(lrc).children()
+			var _this = this
+			$.each(lrcs, (i, item) => {
+				if($(item).hasClass("blank")) {
+					$(item).height(height / 2 + "px")
+					$(item).css("line-height", height / 2 + "px")
+				}else {
+					$(item).height(_this.lrcItemH)
+				}
+			})
+
+			var startY, endY
+
+			lrc.addEventListener('touchstart', (e) => {
+				startY = e.touches[0].pageY
+				e.target.parentNode.touch = true
+				lrcTools.style.display = 'block'
+			 }, true)
+			lrc.addEventListener('touchend', (e) => {
+				endY = e.changedTouches[0].pageY
+				e.target.parentNode.touch = false
+				lrcTools.style.display = 'none'
+				if(Math.abs(startY - endY) <= _this.lrcItemH) {
+					return
+				}
+				let scrollH = e.target.parentNode.scrollHeight
+				let scrollTop = e.target.parentNode.scrollTop
+				if(scrollTop > 0) {
+					let lrcIndex = Math.round(scrollTop / _this.lrcItemH) <= 0 ? 1 : Math.round(scrollTop / _this.lrcItemH)
+					if(lrcIndex > _this.comp.attr.lrc.length - 1) {
+						lrcIndex = _this.comp.attr.lrc.length - 1
+					}
+					_this.audio.currentTime = _this.comp.attr.lrc[lrcIndex].long
+				}
+			}, true)
+			lrc.addEventListener('mousedown', (e) => { 
+				e.target.parentNode.touch = true
+				lrcTools.style.display = 'block'
+			}, true)
+			lrc.addEventListener('mouseup', (e) => { 
+				e.target.parentNode.touch = false
+				lrcTools.style.display = 'none'
+			}, true)
+
+		}
+
+	}
 
 	class Player {
 		constructor(component) {
@@ -251,6 +330,7 @@
 			this.playing = false
 			this.src = ''
 			this.mode = modes.SINGLE
+			this.lrcController = null
 			this.init()
 		}
 		init() {
@@ -265,34 +345,22 @@
 			slideBar.addEventListener('mousedown', (e) => { e.target.touch = true })
 			slideBar.addEventListener('input', (e) => { this.comp.$set(this.comp.attr, 'currentTime', numberToSlong(e.target.value)) })
 
-			lrc.addEventListener('touchstart', (e) => { 
-				e.target.parentNode.touch = true
-				lrcTools.style.display = 'block'
-			 }, true)
-			lrc.addEventListener('touchend', (e) => { 
-				e.target.parentNode.touch = false
-				lrcTools.style.display = 'none'
-				let scrollH = e.target.parentNode.scrollHeight
-				let scrollTop = e.target.parentNode.scrollTop
-				if(scrollTop > 0) {
-					let lrcIndex = Math.round(scrollTop / 24) <= 0 ? 1 : Math.round(scrollTop / 24)
-					this.audio.currentTime = this.comp.attr.lrc[lrcIndex + 3].long
-				}
-			}, true)
-			lrc.addEventListener('mousedown', (e) => { 
-				e.target.parentNode.touch = true
-				lrcTools.style.display = 'block'
-			}, true)
-			lrc.addEventListener('mouseup', (e) => { 
-				e.target.parentNode.touch = false
-				lrcTools.style.display = 'none'
-			}, true)
+
+			this.lrcController = new LrcController(this, this.comp.viewMode.layout.lrc.height)
+
 			this.audio.addEventListener('loadedmetadata', (e) => { this.setDuration(e.target.duration) })
 			this.audio.addEventListener('timeupdate', (e) => {
 				if(slideBar.touch != true) { this.setCurrTime() }
 				if(!lrc.touch) { this.comp.dynamicLrc(e.target.currentTime) }
 			})
 			this.audio.addEventListener('ended', (e) => { this.ended() })
+
+			$(window).on("touchstart", function(){
+			    // _this.audio.load()
+			   	_this.play()
+			    $(this).off("touchstart");
+			});
+
 		}
 		ended() {
 			this.stop()
@@ -328,9 +396,18 @@
 			this.comp.setCurrTime(numberToSlong(this.audio.currentTime))
 			this.comp.tools.slideBar.value = this.audio.currentTime
 		}
+		rerender() {
+			this.lrcController = new LrcController(this, this.comp.viewMode.layout.lrc.height)
+		}
 	}
 
 	export default {
+		data() {
+			return {
+				viewModes: VIEW_MODE,
+				viewMode: VIEW_MODE[0]
+			}
+		},
 		props: {
 			attr: {
 				type: Object,
@@ -363,7 +440,6 @@
 			this.$store.dispatch('initPlayerInfo')
 		},
 		beforeUpdate() {
-			// console.log(this.audio.song.hash + '------' + this.readySong.hash)
 			if(this.audio.src!=this.readySong.play_url) {
 				this.audio.setSrc(this.readySong.play_url)
 				this.loadLrc()
@@ -422,9 +498,7 @@
 					let lrc = this.attr.lrc[i]
 					if(lrc.long <= currentTime.toFixed(2)) {
 						lrc.current = true
-						if(i > 3) {
-							this.tools.lrc.scrollTop = (i - 3) * 24
-						}
+						this.tools.lrc.scrollTop = i * LRC_ITEM_HEIGHT
 						break
 					}
 				}
@@ -530,8 +604,32 @@
 				let buttonsCancel = [
 					{
 						text: '取消',
-						color: 'red',
-
+						color: 'red'
+					}
+				]
+				let groups = [buttons, buttonsCancel]
+				this.$f7.actions(groups)
+			},
+			viewModeClick() {
+				let _this = this
+				let buttons = new Array()
+				$.each(this.viewModes, (i, m) => {
+					buttons.push({
+						text: m.name,
+						onClick: function() {
+							if(m.id != _this.viewMode.id) {
+								_this.viewMode = m
+								if(m.id != 3) {
+									_this.audio.rerender()
+								}
+							}
+						}
+					})
+				})
+				let buttonsCancel = [
+					{
+						text: '取消',
+						color: 'red'
 					}
 				]
 				let groups = [buttons, buttonsCancel]

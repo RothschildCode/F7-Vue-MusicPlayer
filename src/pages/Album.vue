@@ -1,20 +1,7 @@
 <template>
 	<f7-page navbar-fixed toolbar-fixed class="song-list-sheet">
 		<navbar page="song-list-sheet" :title="info.detail.name"></navbar>
-		<div class="list-cover">
-			<div class="back" :style="'background-image:url('+info.img+')'"></div>
-			<div class="row wrapper">
-				<div class="col-30">
-					<img class="sheet-img" :src="info.img" alt="">
-				</div>
-				<div class="col-70">
-					<div class="sheet-name ellipsis" v-html="info.detail.name"></div>
-					<div class="sheet-name ellipsis" v-html="info.detail.language"></div>
-					<div class="sheet-name ellipsis" v-html="info.detail.company"></div>
-					<div class="sheet-name ellipsis" v-html="info.detail.publishTime"></div>
-				</div>
-			</div>
-		</div>
+		<header-cover :src="info.img" :labels="[info.detail.name, info.detail.language, info.detail.company, info.detail.publishTime]"></header-cover>
 		<div class="list-block">
 			<music-list :data="songs" :list="false"></music-list>
 		</div>
@@ -36,6 +23,7 @@
 <script>
 	import Navbar from '../components/Navbar'
 	import MusicList from '../components/MusicList'
+	import HeaderCover from '../components/HeaderCover'
 
 	export default {
 		data() {
@@ -78,6 +66,7 @@
 		},
 		components: {
 			Navbar,
+			HeaderCover,
 			MusicList
 		}
 	}

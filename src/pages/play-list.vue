@@ -18,8 +18,8 @@
 			</div>
 
 			<div class="page-content">
-				<div class="album-back" id="albumBack" :style="'background-image:url('+readySong.img+')'"></div>
-				<div class="overlay"></div>			
+				<!-- <div class="album-back" id="albumBack" :style="'background-image:url('+readySong.img+')'"></div> -->
+				<!-- <div class="overlay"></div>			 -->
 				<div class="list-block no-margin-top">
 					<music-list id="song-list" :data="songList" :list="true"></music-list>
 				</div>

@@ -12,12 +12,15 @@ import './network'
 import jquery from 'jquery'
 import types from './store/mutation-types'
 
+import {PreventOverScroll} from 'preventoverscrolljs'
+
 //导入视频播放器插件
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 
 window.$ = jquery
 window.videojs = videojs
+
 Vue.use(Framework7Vue)
 new Vue({
   el: '#app',
