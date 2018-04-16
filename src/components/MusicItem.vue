@@ -12,9 +12,9 @@
 					<div class="item-title">
 						<div class="ellipsis">
 							<span class="song-name" v-html="data.SongName"></span>
-							<span v-if="data.ResFileHash&&!list" class="flag flag-RES align-self-middle">无损</span>
 						</div>
 						<div class="ellipsis">
+							<span v-if="data.ResFileHash&&!list" class="flag flag-RES align-self-middle">无损</span>
 							<span class="singer-name" v-if="data.SingerName" v-html="data.SingerName"></span>
 							<span class="album-name" v-if="data.AlbumName" v-html="'《' + data.AlbumName + '》'"></span>
 						</div>

@@ -1,0 +1,27 @@
+.theme1 {
+	background-image: url(./assets/global_bg.jpg);
+	.navbar,.item-content,.pages,.page,.toolbar,ul  {
+		background-color: transparent !important;
+		box-shadow: none !important;
+	}
+	.mini-player {
+		
+	}
+	span,a,label,.song-name {
+		color: #fff !important;
+	}
+	.toolbar,.navbar {
+		&:after{
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 499;
+			width: 100%;
+			height: 100%;
+			background-color: #fff;
+			opacity: .2;
+			transform: scaleY(1) !important;			
+		}
+	}
+}
