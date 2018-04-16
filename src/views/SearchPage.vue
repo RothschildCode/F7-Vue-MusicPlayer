@@ -1,38 +1,56 @@
 <template>
-	<div class="search-result">
-		<div class=" navbar buttons-row subtoolbar">
-			<a href="#single" class="button tab-link active">单曲</a>
-			<a href="#sheets" class="button tab-link">歌单</a>
-			<a href="#album" class="button tab-link">专辑</a>
-			<a href="#mv" class="button tab-link">MV</a>
+	<div class="page search-page navbar-fixed toolbar-fixed">
+		<div class="navbar">
+			<div class="bg"></div>
+			<div class="navbar-inner">
+				<div class="left">
+					<a class="link icon-only back">
+						<i class="fa  fa-angle-left fa-2x"></i>
+					</a>
+				</div>
+				<div class="center">
+					<input id="keywordInput" type="text" placeholder="歌曲名/歌手名" v-model="keyword">
+				</div>
+				<div class="right">
+					<a class="link icon-only" @click="onSearch()">
+						搜索
+					</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="page-content">
-			<div class="tabs">
-			  <div id="single" class="tab active">
-				<div id="searchListScrollLoader" class="page-content infinite-scroll search-view">	
-					<div class="list-block" v-if="keyword!=''&&keyword!=null">
-						<music-list id="song-list" :data="searchSongs"></music-list>
+			<div class="list-block" v-if="viewState == 1">
+				<div class="item-content" @click="singerMoldListView()">
+					<div class="item-inner">
+						<div class="item-title">歌手分类</div>
 					</div>
-					<div class="infinite-scroll-preloader">
-						<div v-if="loading&&!isLastPage" class="preloader"></div>
-						<div v-if="!loading&&!isLastPage"><span  @click="loadMore()">加载更多</span></div>	
-						<div v-if="isLastPage" v-html="'没有更多了>_<|||'"></div>
-					</div>
-				</div>	
-			  </div>
-			  <div id="sheets" class="tab">
-			  	<music-set-list :keyword="keyword" :initSetType="1"></music-set-list>
-			  </div>
-			  <div id="album" class="tab">
-				<music-set-list :keyword="keyword" :initSetType="2"></music-set-list>
-			  </div>
-			  <div id="mv" class="tab">
-				<music-set-list :keyword="keyword" :initSetType="3"></music-set-list>
-			  </div>
-			</div>			
+				</div>
+			</div>
+
+			<div class="tips" v-if="viewState == 2">
+				<div class="list-block">
+					<ul>
+						<li v-for="(tip, index) in tips" @click="hotKeywordClick(tip.HintInfo)">
+							<div class="item-content">
+								<div class="item-media">
+									<span class="fa fa-search fa-1x"></span>
+								</div>
+								<div class="item-inner">
+									<div class="item-title" v-html="tip.HintInfo"></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<search-result-view v-if="viewState == 3" :word="keyword"></search-result-view>
+
 		</div>
+
 	</div>
+
 </template>
 
 <style lang="less">
@@ -40,13 +58,6 @@
 	.search-page {
 		.singer-classify{
 			text-align: center;
-		}
-	}
-	.search-result {
-		.tabs .tab {
-			-webkit-overflow-scrolling: touch;
-			height: -webkit-fill-available;
-			height: fill-available;
 		}
 	}
 	.subnavbar {
@@ -147,31 +158,63 @@
 
 <script>
 	import Navbar from '../components/Navbar'
-	import MusicList from '../components/MusicList'
-	import MusicSetList from './modules/search/MusicSetList'
+	import SearchResultView from './SearchResultView'
 	import vuex, {mapState} from 'vuex'
+
+	// import {eventBus, EVENT} from '../e'
 
 	export default {
 		data() {
 			return {
-				keyword: this.word,
+				keyword: '',
 				loading: false,
 				isLastPage: false,
 				pageIndex: 1,
+				tips: [],
+				viewState: 1,
 				searchSongs:[]
 			}
 		},
-		props: ['word'],
 		computed: {
 			...mapState({
-				hotKeywords: state => state.hotKeywords
+				hotKeywords: state => state.search.hotKeywords
 			})
 		},
+		// created() {
+		// 	var _this = this
+		// 	this.$on(EVENT.SEARCH.SEARCH_BTN_TOUCH, function(keyword) {
+		// 		_this.keyword = keyword
+		// 		_this.onSearch()
+		// 	})
+		// 	this.$on(EVENT.SEARCH.KEY_TOUCH, function(viewState){
+		// 		if(viewState != "") {
+		// 			_this.queryTip()
+		// 		}
+		// 		_this.viewState = viewState
+		// 	})
+		// },
 		mounted() {
-			this.onSearch()
+			$("#keywordInput").focus((e) => {
+				if(this.keyword != "") {
+					this.viewState = 2
+				}else {
+					this.viewState = 1
+				}
+			})
+			$("#keywordInput").focus()
+
+			this.$watch("keyword", () => {
+				if(this.keyword == "") {
+					this.viewState = 1
+				}else {
+					this.viewState = 2
+					this.queryTip()
+				}
+			})
 		},
 		methods: {
 			onSearch: function(page = 1) {
+				this.viewState = 3
 				this.$store.dispatch('search_songs', {
 					data: {
 						keyword: this.keyword,
@@ -211,13 +254,12 @@
 				})
 			},
 			singerMoldListView() { 
-				this.$f7.mainView.router.load({url: `/singerMoldList/`})
+				this.$f7.mainView.router.load({url: `/singer-areas/`})
 			}
 		},
 		components: {
 			Navbar,
-			MusicList,
-			MusicSetList
+			SearchResultView
 		}
 	}
 </script>

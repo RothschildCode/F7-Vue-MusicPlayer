@@ -21,10 +21,10 @@
 	export default {
 		methods: {
 			click(quality = 'HQ') {
-				this.$store.dispatch('changeSongQuality', {
+				this.$store.dispatch('player_quality', {
 					quality,
 					callback: (quality) => {
-						this.$store.dispatch('getSongSource', {
+						this.$store.dispatch('player_source', {
 							quality
 						})
 					}

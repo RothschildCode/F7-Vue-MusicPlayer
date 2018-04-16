@@ -1,16 +1,16 @@
 import axios from 'axios'
 import * as types from './mutation-types'
 import * as urls from './remote-urls'
-import * as util from '../utils/common'
-import * as songStatus from '../utils/song-status'
-import * as qualities from '../utils/song-quality'
+import * as util from '../../utils/common'
+import * as songStatus from '../../utils/song-status'
+import * as qualities from '../../utils/song-quality'
 
-import * as operateFuncs from '../utils/song-operate-func'
-import defaultConf from '../config/appConf'
-import {APP_DEF_CONF} from '../config/config'
-import * as factory from '../utils/DataFactory'
+import * as operateFuncs from '../../utils/song-operate-func'
+import defaultConf from '../../config/appConf'
+import {APP_DEF_CONF} from '../../config/config'
+import * as factory from '../../utils/DataFactory'
 
-import {get, set} from '../utils/local-storage'
+import {get, set} from '../../utils/local-storage'
 
 export function getSongsByKeyword({commit}, { data, callback }) {
 	let param = $.param(data)

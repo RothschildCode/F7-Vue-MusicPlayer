@@ -62,7 +62,7 @@
 		},
 		methods: {
 			getData() {
-				this.$store.dispatch('getSpecialList', {
+				this.$store.dispatch('home_special', {
 					url: this.url,
 					callback: (data) => {
 						this.list = data

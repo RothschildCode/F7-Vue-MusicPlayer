@@ -1,6 +1,6 @@
 <template>
 	<f7-block>
-		<song-classify-group v-for="(group, index) in songClassifyList" :key="index" :group="group"></song-classify-group>
+		<song-classify-group v-for="(group, index) in typelist" :key="index" :group="group"></song-classify-group>
 	</f7-block>
 </template>
 
@@ -11,11 +11,11 @@
 	export default {
 		computed: {
 			...mapState({
-				songClassifyList: state => state.songClassifyList
+				typelist: state => state.songs.typelist
 			})
 		},
 		mounted() {
-		  this.$store.dispatch('getInitSongClassifyList')
+		  this.$store.dispatch('songs_getTypelist')
 		},
 		components: {
 			SongClassifyGroup

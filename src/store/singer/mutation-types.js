@@ -1,0 +1,3 @@
+export const SINGER_AREAS = 'SINGER_TYPES'
+export const SINGER_SINGERS = 'SINGER_SINGERS'
+export const SINGER_SONGS = 'SINGER_SONGS'

@@ -1,6 +1,5 @@
 <template>
 	<f7-page navbar-fixed toolbar-fixed class="song-list-sheet">
-		<!-- <navbar page="song-list-sheet" :title="data.spcialName"></navbar> -->
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="left">

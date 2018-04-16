@@ -1,0 +1,1 @@
+SpecialDetail.vue

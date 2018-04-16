@@ -31,7 +31,7 @@
 </template>
 
 <style lang="less">
-	@import '../../../css/mixins.less';
+	@import '../css/mixins.less';
 	.album-list {
 		font-size: .8rem;
 		.special-name {
@@ -121,9 +121,9 @@
 			click(item) {
 				switch(this.setType) {
 					case 1:
-						this.$f7.mainView.router.load({url: `/musicset/?id=${item.specialid}&type=${this.setType}`})
+						this.$f7.mainView.router.load({url: `/special-detail/?id=${item.specialid}&type=${this.setType}`})
 					case 2: 
-						this.$f7.mainView.router.load({url: `/musicset/?id=${item.albumid}&type=${this.setType}`})
+						this.$f7.mainView.router.load({url: `/special-detail/?id=${item.albumid}&type=${this.setType}`})
 				}
 			}
 		}

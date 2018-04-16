@@ -115,8 +115,8 @@
 		},
 		computed: {
 			...mapState({
-				readySong: state => state.readySong,
-				config: state => state.config
+				readySong: state => state.player.readySong,
+				config: state => state.player.config
 			})
 		},
 		methods: {
@@ -148,22 +148,22 @@
 				this.$f7.actions(groups)
 			},
 			click(data) {
-				this.$store.dispatch('operateAdd', {data})
-				this.$store.dispatch('changeSongQuality', {quality: 'NORMAL'})
-				this.$store.dispatch('getSongSource', {
+				this.$store.dispatch('player_add', {data})
+				this.$store.dispatch('player_quality', {quality: 'NORMAL'})
+				this.$store.dispatch('player_source', {
 					data,
 					callback: () => {
-						this.$store.dispatch('operatePlay')
+						this.$store.dispatch('player_play')
 					}
 				})
 			},
 			add(data) {
-				this.$store.dispatch('operateAdd', {
+				this.$store.dispatch('player_add', {
 					data
 				})
 			},
 			removeFromList(data) {
-				this.$store.dispatch('operateRemove', {
+				this.$store.dispatch('player_remove', {
 					data
 				})
 			}

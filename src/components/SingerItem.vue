@@ -38,7 +38,7 @@
 		},
 		methods: {
 			click(data) {
-				this.$f7.mainView.router.load({url: `/singer/?keyword=${data.singerName}&pic=${data.singerAlbum}`})
+				this.$f7.mainView.router.load({url: `/singer-detail/?keyword=${data.singerName}&pic=${data.singerAlbum}`})
 			}
 		}
 	}

@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import * as types from './mutation-types'
-import StoreCache from '../utils/storeCache'
+import StoreCache from '../../utils/storeCache'
 import find from 'lodash/find'
 
-import * as operateTypes from '../utils/operate-type'
+import * as operateTypes from '../../utils/operate-type'
 
-let cache = new StoreCache('vuex')	
+let cache = new StoreCache('vuex')
 
 export default {
 	[types.GET_SONGS_BY_KEYWORD] (state, {searchSongs}) {

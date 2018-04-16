@@ -1,39 +1,25 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
-import * as actions from './action'
-import mutations from './mutations'
-import StoreCache from '../utils/storeCache'
+import Vue from 'vue'
+import PlayerModule from './player'
+import SingerModule from './singer'
+import SongsModule from './songs'
+import SearchModule from './search'
+import SpecialModule from './special'
+import MvModule from './mv'
+import HomeModule from './home'
 
 Vue.use(Vuex)
-let cache = new StoreCache('vuex')
 
-const state = {
-  searchSongs: {},
-  rankings: {},
-  songClassifyList: {},
-  singerClassifyList: {},
-  classifyPostList: {},
-  singers: [],
-  songList: [],
-  readySong: {},
-  config: {},
-  singerClassifies: [],
-  songs: [],
-  KGSongSheet: {},
-  homeNewSong: {
-    region: [],
-    map: {}
-  },
-  starAnchorList: [],
-  songSheet: {
-  	other: {},
-  	songs: []
-  },
-  lang: cache.get('lang') || 'en'
+var modules = {
+  player: PlayerModule,
+  singer: SingerModule,
+  songs: SongsModule,
+  search: SearchModule,
+  special: SpecialModule,
+  mv: MvModule,
+  home: HomeModule
 }
 
 export default new Vuex.Store({
-  state,
-  actions,
-  mutations
+  modules
 })

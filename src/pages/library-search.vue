@@ -177,7 +177,7 @@
 		},
 		computed: {
 			...mapState({
-				hotKeywords: state => state.hotKeywords
+				hotKeywords: state => state.search.hotKeywords
 			})
 		},
 		// created() {
@@ -215,7 +215,7 @@
 		methods: {
 			onSearch: function(page = 1) {
 				this.viewState = 3
-				this.$store.dispatch('getSongsByKeyword', {
+				this.$store.dispatch('search_songs', {
 					data: {
 						keyword: this.keyword,
 						page
@@ -246,7 +246,7 @@
 				this.onSearch(this.pageIndex)
 			},
 			queryTip() {
-				this.$store.dispatch("searchTip", {
+				this.$store.dispatch("search_tip", {
 					keyword: this.keyword,
 					callback: (tips) => {
 						this.$set(this, 'tips', tips)

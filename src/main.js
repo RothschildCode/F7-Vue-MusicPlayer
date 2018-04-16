@@ -10,9 +10,7 @@ import App from './app'
 import store from './store'
 import './network'
 import jquery from 'jquery'
-import types from './store/mutation-types'
-
-import {PreventOverScroll} from 'preventoverscrolljs'
+// import types from './store/mutation-types'
 
 //导入视频播放器插件
 import videojs from 'video.js'
@@ -34,4 +32,4 @@ new Vue({
     app: App
   }
 })
-store.dispatch("getHotKeyword")
+store.dispatch("search_hotkey")

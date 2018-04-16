@@ -22,13 +22,13 @@
 				</div>	
 			  </div>
 			  <div id="sheets" class="tab">
-			  	<music-set-list :keyword="keyword" :initSetType="1"></music-set-list>
+			  	<special-list-view :keyword="keyword" :initSetType="1"></special-list-view>
 			  </div>
 			  <div id="album" class="tab">
-				<music-set-list :keyword="keyword" :initSetType="2"></music-set-list>
+				<special-list-view :keyword="keyword" :initSetType="2"></special-list-view>
 			  </div>
 			  <div id="mv" class="tab">
-				<music-set-list :keyword="keyword" :initSetType="3"></music-set-list>
+				<special-list-view :keyword="keyword" :initSetType="3"></special-list-view>
 			  </div>
 			</div>			
 		</div>
@@ -148,7 +148,7 @@
 <script>
 	import Navbar from '../components/Navbar'
 	import MusicList from '../components/MusicList'
-	import MusicSetList from './modules/search/MusicSetList'
+	import SpecialListView from './SpecialListView'
 	import vuex, {mapState} from 'vuex'
 
 	export default {
@@ -217,7 +217,7 @@
 		components: {
 			Navbar,
 			MusicList,
-			MusicSetList
+			SpecialListView
 		}
 	}
 </script>

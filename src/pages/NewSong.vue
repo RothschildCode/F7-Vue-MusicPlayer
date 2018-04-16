@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<div class="navbar buttons-row subtoolbar">
-			<a v-for="(reg, index) in homeNewSong.region" :href="'#' + reg.id" class="button tab-link" :class="{active: index == 0}" v-html="reg.name"></a>
+			<a v-for="(reg, index) in news.region" :href="'#' + reg.id" class="button tab-link" :class="{active: index == 0}" v-html="reg.name"></a>
 		</div>
 		<div class="page-content">
 			<div class="tabs subtoolbar-fixed">
-				<div v-for="(reg, index) in homeNewSong.region" :id="reg.id" class="tab" :class="{active: index == 0}">
+				<div v-for="(reg, index) in news.region" :id="reg.id" class="tab" :class="{active: index == 0}">
 					<div class="list-block">
-						<music-list :data="homeNewSong.map[reg.id]"></music-list>
+						<music-list :data="news.map[reg.id]"></music-list>
 					</div>
 				</div>
 			</div>			
@@ -23,11 +23,11 @@
 	export default {
 		computed: {
 			...mapState({
-				homeNewSong: state => state.homeNewSong
+				news: state => state.home.news
 			})
 		},
 		mounted() {
-			this.$store.dispatch('getKGHomeNewSong')
+			this.$store.dispatch('home_news')
 		},
 		methods: {
 			click(data) {
