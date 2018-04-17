@@ -36,11 +36,15 @@
 			<div class="overlay"></div>
 			<div class="play-lrc-tools" v-bind:class="{unvisible: !viewMode.layout.lrc.visible}" id="playLrcTools">
 				<span class="based-line"></span>
+				<div class="time">00:32</div>
+				<div class="play">
+					<i class="fa fa-play fa-1x"></i>
+				</div>
 			</div>
 			<div v-bind:class="{unvisible: !viewMode.layout.lrc.visible}" class="play-lrc" id="playLrc">
-				<div class="blank">倾听音乐，享受生活</div>
+				<div class="blank"></div>
 				<div v-for="lrcItem in attr.lrc" :class="lrcItem.current ? 'current' : ''">{{ lrcItem.text }}</div>
-				<div class="blank">倾听音乐，享受生活</div>
+				<div class="blank"></div>
 			</div>
 		    	<div class="controls">
 		    		<div class="row flex-row-wrap controls-bar">
@@ -230,16 +234,32 @@
 			z-index: 200;
 			.based-line {
 				display: block;
-				width: 100%;
+				width: 80%;
+				margin: 0 auto;
 				border-top: dashed #fff 1px;
 				// background-color: #fff;
-				position: fixed;
+				// position: fixed;
 				opacity: .5;
 				// -webkit-transform: translateY(8200%);
 				// -moz-transform: translateY(8200%);
 				// -ms-transform: translateY(8200%);
 				// -o-transform: translateY(8200%);
 				// transform: translateY(8200%);
+			}
+			.time,
+			.play {
+				position: absolute;
+				top: 50%;
+				transform: translateY(15%);
+				color: #fff;
+			}
+			.time {
+				left: 0;
+				padding-left: .5rem;
+			}
+			.play {
+				right: 0;
+				padding-right: .5rem;
 			}
 		}
 	}
@@ -262,6 +282,8 @@
 			this.comp = p.comp
 			this.audio = p.audio
 			this.lrcItemH = LRC_ITEM_HEIGHT
+			this.releaseBuffer = null
+			this.bufferTime = null
 			this.init()
 		}
 
@@ -275,7 +297,7 @@
 			//slideBar 进度条
 			//lrc 歌词列表
 			//lrcTools 控制条面板
-			let { slideBar, lrc, lrcTools } = this.comp.tools
+			let { slideBar, lrc, lrcTools, positionTime, positionPlay } = this.comp.tools
 			$(lrc).height(height + "px")
 			$(lrcTools).height(height + "px")
 			$(lrcTools).find(".based-line").css("margin-top", (height / 2 + (this.lrcItemH / 2)) + "px")
@@ -296,11 +318,14 @@
 				startY = e.touches[0].pageY
 				e.target.parentNode.touch = true
 				lrcTools.style.display = 'block'
+
+				_this.clearReleaseBuffer()
+
 			 }, true)
 			lrc.addEventListener('touchend', (e) => {
 				endY = e.changedTouches[0].pageY
-				e.target.parentNode.touch = false
-				lrcTools.style.display = 'none'
+				// e.target.parentNode.touch = false
+				// lrcTools.style.display = 'none'
 				if(Math.abs(startY - endY) <= _this.lrcItemH) {
 					return
 				}
@@ -311,19 +336,47 @@
 					if(lrcIndex > _this.comp.attr.lrc.length - 1) {
 						lrcIndex = _this.comp.attr.lrc.length - 1
 					}
-					_this.audio.currentTime = _this.comp.attr.lrc[lrcIndex].long
+					// _this.audio.currentTime = _this.comp.attr.lrc[lrcIndex].long
+					_this.bufferTime = _this.comp.attr.lrc[lrcIndex].long
 				}
+
+				_this.creteReleaseBuffer(e.target.parentNode)
+
 			}, true)
 			lrc.addEventListener('mousedown', (e) => { 
 				e.target.parentNode.touch = true
 				lrcTools.style.display = 'block'
+
+				_this.clearReleaseBuffer()
+
 			}, true)
-			lrc.addEventListener('mouseup', (e) => { 
-				e.target.parentNode.touch = false
-				lrcTools.style.display = 'none'
+			lrc.addEventListener('mouseup', (e) => {
+				// e.target.parentNode.touch = false
+				// lrcTools.style.display = 'none'
+
+				_this.creteReleaseBuffer(e.target.parentNode.touch)
+
 			}, true)
 
+			positionPlay.addEventListener('touch', (e) => {
+				_this.audio.currentTime = _this.bufferTime
+			})
+
+
 		}
+
+		clearReleaseBuffer() {
+			clearTimeout(this.releaseBuffer)
+		}
+
+		creteReleaseBuffer(node) {
+			var _this = this
+			this.releaseBuffer = setTimeout(function(){
+				this.comp.tools.lrcTools.style.display = 'none'
+				node.touch = true
+			})
+		}
+
 
 	}
 

@@ -23,8 +23,7 @@ var VIEW_MODE = [
 		layout: {
 			cover: true,
 			lrc: {
-				visible: true,
-				height: 30
+				visible: false
 			},
 			backBlur: true
 		}

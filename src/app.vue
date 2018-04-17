@@ -1,6 +1,6 @@
 <template>
   <!-- App -->
-  <div id="app" class="theme theme1">
+  <div id="app" class="">
 
   <div class="panel-overlay"></div>
     <!-- Main Views -->

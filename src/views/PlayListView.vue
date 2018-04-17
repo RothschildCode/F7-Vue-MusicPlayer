@@ -106,8 +106,8 @@
 	export default {
 		computed: {
 			...mapState({
-				addedlist: state => state.addedlist,
-				readySong: state => state.readySong,
+				addedlist: state => state.player.addedlist,
+				readySong: state => state.player.readySong,
 			})
 		},
 		mounted() {

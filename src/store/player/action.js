@@ -8,6 +8,8 @@ import * as status from '../../utils/song-status'
 
 import defaultConf from '../../config/appConf'
 
+import {get, set} from '../../utils/local-storage'
+
 export function player_source({commit, state}, {data, callback = () => {}, quality}) {
 	data = data ? data : state.readySong
 	quality = quality ? quality : qualities.NORMAL
