@@ -1,5 +1,5 @@
 <template>
-	<div class="notifications mini-player">
+	<div class="notifications mini-player" theme-dynamic-render>
 		<div class="block-content">
 			<div class="row">
 				<div class="col-20">

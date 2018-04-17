@@ -1,5 +1,5 @@
 <template>
-	<ul>
+	<ul class="music-list-view">
 		<music-item v-for="(song, index) in data" :key="index"  :data="song" :list="list"></music-item>
 	</ul>
 </template>

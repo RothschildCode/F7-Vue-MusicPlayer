@@ -99,6 +99,10 @@
 
 <style lang="less">
 	.player-popup {
+		.navbar {
+			opacity: 1 !important;
+			background-image: none !important;
+		}
 		.quality-link {
 			font-size: .7em;
 			color: white;

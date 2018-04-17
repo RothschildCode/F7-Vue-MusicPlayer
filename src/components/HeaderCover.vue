@@ -1,16 +1,12 @@
 <template>
 	<div class="header-cover">
 		<div class="header-cover-bg" :style="'background-image:url('+ src||initSrc +')'"></div>
-		<div class="row wrapper">
+		<div class="row wrapper" theme-dynamic-render>
 			<div class="col-30">
 				<img class="header-cover-img" :src="src||initSrc" alt="">
 			</div>
 			<div class="col-70">
 				<div v-for="label in labels" class="sheet-name ellipsis" v-html="label"></div>
-				<!-- <div class="sheet-name ellipsis" v-html="info.detail.name"></div>
-				<div class="sheet-name ellipsis" v-html="info.detail.language"></div>
-				<div class="sheet-name ellipsis" v-html="info.detail.company"></div>
-				<div class="sheet-name ellipsis" v-html="info.detail.publishTime"></div> -->
 			</div>
 		</div>
 	</div>

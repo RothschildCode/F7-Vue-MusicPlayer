@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="new-songs-view">
 		<div class="navbar buttons-row subtoolbar" theme-dynamic-render>
 			<a v-for="(reg, index) in news.region" :href="'#' + reg.id" class="button tab-link" :class="{active: index == 0}" v-html="reg.name"></a>
 		</div>

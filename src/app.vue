@@ -1,6 +1,6 @@
 <template>
   <!-- App -->
-  <div id="app">
+  <div id="app" class="theme theme1">
 
   <div class="panel-overlay"></div>
     <!-- Main Views -->
@@ -8,7 +8,7 @@
       <f7-view id="main-view"  main>
         <f7-pages>
           <f7-page class="navbar-fixed">
-            <f7-toolbar class="theme-a">
+            <f7-toolbar class="theme-a" theme-dynamic-render>
               <a href="#" data-panel="left" class="tab-link link open-panel">
                 <label class="fa fa-bars fa-1x"></label>
               </a>
@@ -19,7 +19,7 @@
             </f7-toolbar>
             <f7-tabs>
               <f7-tab active id="newsong">
-                <new-view></new-view>
+                <new-songs-view></new-songs-view>
               </f7-tab>
             </f7-tabs>
           </f7-page>
@@ -27,26 +27,20 @@
       </f7-view>
     </f7-views>
 
-    <menu-panel></menu-panel>
-    <play-list-popup></play-list-popup>
-    <play-popup></play-popup>
-    <mini-player></mini-player>
+    <menu-panel-view></menu-panel-view>
+    <play-list-view></play-list-view>
+    <player-view></player-view>
+    <mini-player-view></mini-player-view>
 
   </div>
 </template>
 
 <script>
-import NewView from './pages/NewSong.vue'
-import LibrarySingerView from './pages/library-singer'
-import SongSheetView from './pages/song-sheet'
-import CenterView from './pages/center'
-import PlayPopup from './pages/play'
-import PlayListPopup from './pages/play-list'
-import Navbar from './components/Navbar'
-import MiniPlayer from './pages/mini-player'
-import QualityPopover from './pages/quality-popover'
-import MenuPanel from './pages/MenuPanel'
-import HomeSpecialTab from './pages/HomeSpecialTab'
+import NewSongsView from './views/NewSongsView'
+import PlayerView from './views/PlayerView'
+import PlayListView from './views/PlayListView'
+import MiniPlayerView from './views/MiniPlayerView'
+import MenuPanelView from './views/MenuPanelView'
 export default {
   data() {
     return {
@@ -62,17 +56,11 @@ export default {
     }
   },
   components: {
-    NewView,
-    MenuPanel,
-    LibrarySingerView,
-    SongSheetView,
-    CenterView,
-    PlayPopup,
-    PlayListPopup,
-    Navbar,
-    MiniPlayer,
-    QualityPopover,
-    HomeSpecialTab
+    NewSongsView,
+    PlayerView,
+    PlayListView,
+    MiniPlayerView,
+    MenuPanelView
   }
 }
 </script>

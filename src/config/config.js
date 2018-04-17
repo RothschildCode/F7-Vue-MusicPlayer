@@ -9,6 +9,12 @@ var APP_DEF_CONF = {
 	quality: "NORMAL",
 	status: "PAUSE"
 }
+var INIT_DEF_SONG = {
+	mode: "LOOP",
+	quality: "NORMAL",
+	status: "PAUSE",
+	"sheet_def_img": cover
+}
 
 var VIEW_MODE = [
 	{
@@ -54,6 +60,24 @@ var MENUS = [
 		event: function() {
 
 		}
+	}
+]
+
+var PLAY_MODE = [
+	{
+		id: 1,
+		label: "单曲循环",
+		event: function() {}
+	},
+	{
+		id: 2,
+		label: "顺序播放",
+		event: function() {}
+	},
+	{
+		id: 3,
+		label: "随机播放",
+		event: function() {}
 	}
 ]
 

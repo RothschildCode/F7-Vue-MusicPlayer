@@ -1,27 +1,116 @@
+@theme2bg: url(./assets/global_bg.jpg);
+@theme2blurbg: url(./assets/global_blur_bg.jpg);
+
+@main-color: #fff;
+
+@musiclistview-song-color: @main-color;
+@musiclistview-singer-color: antiquewhite;
+@miniplayer-song-color: @main-color;
+@miniplayer-singer-color: @main-color;
+
+/*-------    new-songs-view   -------*/
+@newsongsview-tablink-color: antiquewhite;
+@newsongsview-tablink-after-color: antiquewhite;
+/*-------    search-page-view   -------*/
+@searchpageview-navbar-bg-display: none;
+@searchpageview-tips-text-color: @main-color;
+
+@navbar-bg-display: none;
+
 .theme1 {
-	background-image: url(./assets/global_bg.jpg);
-	.navbar,.item-content,.pages,.page,.toolbar,ul  {
-		background-color: transparent !important;
-		box-shadow: none !important;
-	}
-	.mini-player {
-		
-	}
-	span,a,label,.song-name {
-		color: #fff !important;
-	}
-	.toolbar,.navbar {
-		&:after{
-			content: "";
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 499;
-			width: 100%;
-			height: 100%;
-			background-color: #fff;
-			opacity: .2;
-			transform: scaleY(1) !important;			
+
+	.list-block {
+		color: @main-color;
+		.item-media {
+			color: @main-color !important;
 		}
 	}
+
+	.mini-player-view,
+	.navbar,
+	.toolbar,
+	.header-cover .wrapper,
+	.subnavbar,
+	.buttons-row {
+		background-image: @theme2blurbg;
+		background-size: cover;
+		box-shadow: none;
+	}
+	.page {
+		background-image: @theme2bg;
+		background-size: cover;
+	}
+
+	.navbar {
+		.bg {
+			display: @navbar-bg-display;
+		}
+	}
+
+	ul,
+	.item-content {
+		background-color: transparent;
+	}
+
+	.music-list-view {
+		.music-item {
+			.singer-name {
+				color: @musiclistview-singer-color;
+			}
+			.song-name {
+				color: @musiclistview-song-color;
+			}
+		}
+	}
+
+	/*------     mini-player-view     ------*/
+	.mini-player-view {
+		background-position: 0 -501px;
+		.item-title {
+			color: @miniplayer-song-color;
+		}
+		.item-subtitle {
+			color: @miniplayer-singer-color;
+		}
+	}
+
+
+	/*------     new-songs-view     ------*/
+	.new-songs-view {
+		.subtoolbar {
+			background-position: 0 -44px;
+			.tab-link {
+				color: @newsongsview-tablink-color;
+				&:after {
+					background-color: @newsongsview-tablink-after-color;
+				}
+			}
+		}
+	}
+
+	/*------     search-page-view     ------*/
+	.search-page-view {
+		.navbar {
+			.bg {
+				display: @searchpageview-navbar-bg-display;
+			}
+		}
+		.subtoolbar {
+			background-position: 0 -44px;
+		}
+		.tips {
+			color: @searchpageview-tips-text-color;
+		}
+	}
+
+	/*------     special-detail-page     ------*/
+	.special-detail-page {
+		.header-cover .wrapper {
+			background-position: 0 -44px;
+		}
+		.buttons-row {
+			background-position: 0 -153px;
+		}
+	}
+
 }

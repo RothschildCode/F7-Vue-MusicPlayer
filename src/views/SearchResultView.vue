@@ -1,6 +1,6 @@
 <template>
-	<div class="search-result">
-		<div class=" navbar buttons-row subtoolbar">
+	<div class="search-result-view">
+		<div class=" navbar buttons-row subtoolbar" theme-dynamic-render>
 			<a href="#single" class="button tab-link active">单曲</a>
 			<a href="#sheets" class="button tab-link">歌单</a>
 			<a href="#album" class="button tab-link">专辑</a>
@@ -37,112 +37,108 @@
 
 <style lang="less">
 	@import "../css/mixins.less";
-	.search-page {
-		.singer-classify{
-			text-align: center;
-		}
-	}
-	.search-result {
+	.search-result-view {
 		.tabs .tab {
 			-webkit-overflow-scrolling: touch;
 			height: -webkit-fill-available;
 			height: fill-available;
 		}
-	}
-	.subnavbar {
-		background: #fff;
-		padding: 0;
-	}
-	.hot-keyword {
-		background-color: white;
-		font-size: 1em;
-		padding: .5rem;
-		.title {
-			padding: .4rem 0;
+		.subnavbar {
+			background: #fff;
+			padding: 0;
 		}
-		.k-item {
-			padding: .2rem .5rem;
-			margin: .2rem;
-			color: #333;
-			border: 1px solid #333;
-			border-radius: 20px;
-			display: inline-block;
+		.hot-keyword {
+			background-color: white;
+			font-size: 1em;
+			padding: .5rem;
+			.title {
+				padding: .4rem 0;
+			}
+			.k-item {
+				padding: .2rem .5rem;
+				margin: .2rem;
+				color: #333;
+				border: 1px solid #333;
+				border-radius: 20px;
+				display: inline-block;
+			}
+		}	
+		.tips {
+			.item-media{
+				color: #dbdbdb;
+			}
+			.item-content {
+				font-size: .8rem;
+			}
 		}
-	}	
-	.tips {
-		.item-media{
-			color: #dbdbdb;
+		.search-view {
+			.infinite-scroll-preloader{
+				margin: 10px 0;
+			}
+			.page-content {
+				padding-top: 0;
+			}
 		}
-		.item-content {
-			font-size: .8rem;
-		}
-	}
-	.search-view {
-		.infinite-scroll-preloader{
-			margin: 10px 0;
-		}
-		.page-content {
-			padding-top: 0;
-		}
-	}
-	.search-box {
-		padding: 1rem;
-   		position: relative;
-		.search-form {
-			border-radius: .5rem;
-			-webkit-border-radius: .5rem;
-			background-color: #f4f5f7;
-			border: #d9d9d9 .1rem solid;
-			margin-right: 4rem;
-		}
-		.search-form:after {
-			    content: '';
-			    display: block;
-			    width: .8rem;
-			    height: .8rem;
-			    background-image: url(../assets/search-icon.png);
-			    background-repeat: no-repeat;
-			    background-size: .8rem .8rem;
-			    position: absolute;
-			    left: 1.5rem;
-			    top: 50%;
-			    margin-top: -0.3rem;
-		}
+		.search-box {
+			padding: 1rem;
+	   		position: relative;
+			.search-form {
+				border-radius: .5rem;
+				-webkit-border-radius: .5rem;
+				background-color: #f4f5f7;
+				border: #d9d9d9 .1rem solid;
+				margin-right: 4rem;
+			}
+			.search-form:after {
+				    content: '';
+				    display: block;
+				    width: .8rem;
+				    height: .8rem;
+				    background-image: url(../assets/search-icon.png);
+				    background-repeat: no-repeat;
+				    background-size: .8rem .8rem;
+				    position: absolute;
+				    left: 1.5rem;
+				    top: 50%;
+				    margin-top: -0.3rem;
+			}
 
-		.search-keyword {
-			box-sizing: border-box;
-			-webkit-box-sizing: border-box;
-			width: 100%;
-			outline: 0;
-			font-size: .8rem;
-			padding: .2rem 1rem .2rem 1.5rem;
-			height: 2rem;
-			border: 0;
-			background-color: rgba(255,255,255,0)
-		}
+			.search-keyword {
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				width: 100%;
+				outline: 0;
+				font-size: .8rem;
+				padding: .2rem 1rem .2rem 1.5rem;
+				height: 2rem;
+				border: 0;
+				background-color: rgba(255,255,255,0)
+			}
 
-		.search-btn {
-			position: absolute;
-			width: 3rem;
-			height: 2.2rem;
-			line-height: 2.2rem;
-			bottom: 1rem;
-			right: 1rem;
-			background-color: #fc9b0b;
-			background-image: linear-gradient(to bottom,#fda10d,#f77700);
-			font-size: .8rem;
-			text-align: center;
-			border: 0;
-			border-radius: .5rem;
-			-webkit-border-radius: .5rem;
-			color: #fff
-		}
+			.search-btn {
+				position: absolute;
+				width: 3rem;
+				height: 2.2rem;
+				line-height: 2.2rem;
+				bottom: 1rem;
+				right: 1rem;
+				background-color: #fc9b0b;
+				background-image: linear-gradient(to bottom,#fda10d,#f77700);
+				font-size: .8rem;
+				text-align: center;
+				border: 0;
+				border-radius: .5rem;
+				-webkit-border-radius: .5rem;
+				color: #fff
+			}
 
-		.search-disabled-btn {
-			color: #959595;
-			background: #e5e5e5;
+			.search-disabled-btn {
+				color: #959595;
+				background: #e5e5e5;
+			}		
 		}		
 	}
+
 </style>	
 
 <script>

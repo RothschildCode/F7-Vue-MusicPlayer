@@ -1,0 +1,88 @@
+@normal: url(./assets/global_bg.jpg);
+@blur: url(./assets/global_blur_bg.png);
+
+@song-name-color: #fff;
+@singer-name-color: #fff;
+@miniplayer-song-color: #fff;
+@miniplayer-singer-color: #fff;
+
+/*-------    new-songs-view   -------*/
+@newsongsview-tablink-color: #fff;
+@newsongsview-tablink-after-color: #fff;
+/*-------    search-page-view   -------*/
+@searchpageview-navbar-bg-display: none;
+
+
+@navbar-bg-display: none;
+
+.theme2 {
+
+	.mini-player-view,
+	.navbar,
+	.toolbar,
+	.header-cover .wrapper,
+	.ubttons-row {
+		background-image: @blur;
+		background-size: cover;
+	}
+	.page {
+		background-image: @normal;
+		background-size: cover;
+	}
+
+	.navbar {
+		.bg {
+			display: @navbar-bg-display;
+		}
+	}
+
+	ul,
+	.item-content {
+		background-color: transparent;
+	}
+
+	.song-name {
+		color: @song-name-color;
+	}
+	.singer-name {
+		color: @singer-name-color;
+	}
+
+	/*------     mini-player-view     ------*/
+	.mini-player-view {
+		background-position: 0 -501px;
+		.item-title {
+			color: @miniplayer-song-color;
+		}
+		.item-subtitle {
+			color: @miniplayer-singer-color;
+		}
+	}
+
+
+	/*------     new-songs-view     ------*/
+	.new-songs-view {
+		.subtoolbar {
+			background-position: 0 -44px;
+			.tab-link {
+				color: @newsongsview-tablink-color;
+				&:after {
+					background-color: @newsongsview-tablink-after-color;
+				}
+			}
+		}
+	}
+
+	/*------     search-page-view     ------*/
+	.search-page-view {
+		.navbar {
+			.bg {
+				display: @searchpageview-navbar-bg-display;
+			}
+		}
+		.subtoolbar {
+			background-position: 0 -44px;
+		}
+	}
+
+}

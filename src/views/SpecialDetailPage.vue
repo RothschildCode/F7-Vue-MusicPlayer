@@ -1,6 +1,6 @@
 <template>
-	<f7-page navbar-fixed toolbar-fixed class="song-list-sheet">
-		<div class="navbar">
+	<f7-page navbar-fixed toolbar-fixed class="special-detail-page">
+		<div class="navbar" theme-dynamic-render>
 			<div class="navbar-inner">
 				<div class="left">
 					<a class="link icon-only back">
@@ -15,14 +15,14 @@
 				</div>
 
 		        <div class="subnavbar">
-					<div class="buttons-row">
+					<div class="buttons-row" theme-dynamic-render>
 						<a href="#list" class="button tab-link active">歌曲</a>
 						<a href="#remark" class="button tab-link">介绍</a>
 					</div>
 		        </div>
 
 			</div>
-		</div>		
+		</div>
 
 		<header-cover v-if="setType == 1" :src="data.specialImg" :labels="[data.spcialName, data.specialCreat]"></header-cover>
 		<header-cover v-if="setType == 2" :src="data.img" :labels="[data.name, data.language, data.company, data.publicTime]"></header-cover>
@@ -38,15 +38,15 @@
 				<div class="content-block">
 			      <div v-if="setType==2" v-html="data.text" class="content-block-inner"></div>
 			    </div>
-			  </div>				
-			</div>			
+			  </div>
+			</div>
 		</div>
 	</f7-page>
 </template>
 
 <style lang="less">
 	@import '../css/mixins.less';
-	.song-list-sheet {
+	.special-detail-page {
 		.navbar {
 			background-color: transparent;
 			.subnavbar {

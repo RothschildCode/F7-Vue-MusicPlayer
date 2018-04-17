@@ -32,4 +32,5 @@ new Vue({
     app: App
   }
 })
+
 store.dispatch("search_hotkey")

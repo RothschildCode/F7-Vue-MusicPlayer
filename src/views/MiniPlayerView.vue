@@ -1,5 +1,5 @@
 <template>
-	<div class="notifications mini-player">
+	<div class="notifications mini-player-view">
 		<div class="block-content">
 			<div class="row">
 				<div class="col-20">
@@ -25,7 +25,7 @@
 
 <style lang="less">
 	@import '../css/mixins.less';
-	.mini-player{
+	.mini-player-view{
 		width: 100%;
 		height: @bottomBarHeight;
 		background-color: @miniPlayerColor;
